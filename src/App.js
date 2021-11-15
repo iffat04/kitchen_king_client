@@ -15,10 +15,15 @@ import Login from './Pages/Login/Login';
 import Purchase from './Pages/Purchase/Purchase';
 import Banner from './Pages/Home/Banner/Banner';
 import Register from './Pages/Register/Register';
+import AuthProvider from './contexts/authContext';
+import PrivateRoute from './Pages/PrivateRoute/PrivateRoute';
+import AddProduct from './Pages/AddProduct/AddProduct';
+import UserDashBoard from './Pages/UserDashBoard/UserDashBoard';
 
 function App() {
   return (
     <div className="App">
+      <AuthProvider>
       <Router>
         <Header />
         <Routes>
@@ -28,14 +33,17 @@ function App() {
         <Route path = "/allProducts"  element = {<AllProducts />} />
         <Route path = "/login" element={<Login/>} />
         <Route path = "/register" element={<Register/>} />
-
-        <Route path = "/purchase/:id" element = {<Purchase/>} />
+         
+        <Route element = {<PrivateRoute/>} >
+            <Route  path = "/purchase/:id" element={<Purchase />} />
+            <Route path="/dashBoard" element={<UserDashBoard/>} />
+        </Route>
 
         </Routes>
         <Footer/>
 
       </Router>
-
+      </AuthProvider>
 
       
     </div>

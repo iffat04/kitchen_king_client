@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import {
   Button,
@@ -17,7 +18,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import LabelIcon from '@mui/icons-material/Label';
 import PersonIcon from '@mui/icons-material/Person';
 import { makeStyles } from '@mui/styles';
-import UseAuth from "../../../hooks/useAuth";
+import UseAuth from '../../hooks/useAuth'
 
 const useStyles = makeStyles(()=>({
   link:{
@@ -30,7 +31,7 @@ const useStyles = makeStyles(()=>({
   }
 }));
 
-function DrawerComponent() {
+const UserDashBoard = () => {
 const classes = useStyles();
 const [openDrawer, setOpenDrawer] = useState(false);
 const {user, logOut} = UseAuth();
@@ -43,45 +44,41 @@ return (
       <List>
        <ListItem onClick={() => setOpenDrawer(false)}>
           <ListItemText>
-            <Link to="/">Home</Link>
+            <Link to="/myorder">Myorder</Link>
           </ListItemText>
         </ListItem>
 
         <ListItem onClick={() => setOpenDrawer(false)}>
           <ListItemText>
-            <Link to="/allProducts">Explore</Link>
+            <Link to="/pay">pay</Link>
           </ListItemText>
         </ListItem>
 
        
-        {user.email &&
+      
                <ListItem onClick={() => setOpenDrawer(false)}>
                <ListItemText>
-                 <Link to="/DashBoard">DashBoard</Link>
+                 <Link to="/review">Review</Link>
                </ListItemText>
              </ListItem>
-         }
-          {user.email?
-              
-              <Button align="right" onClick={logOut}>
-                <PersonIcon/>{user.displayName} 
-                <Typography marginX="10px" bgcolor="yellow" padding="5px" borderRadius="4px">Log Out</Typography>
-                </Button>
-                  :
+      
              
                 <ListItem onClick={() => setOpenDrawer(false)}>
                 <ListItemText>
-                  <Link to="/login">Login</Link>
+                  <Link to="/" onClick={logOut}>LogOut</Link>
                 </ListItemText>
               </ListItem>
-              }
+              
 
       </List>
     </Drawer>
-    <MenuIcon onClick={() => setOpenDrawer(!openDrawer)}>
-      <MenuIcon />
+    <MenuIcon sx={{fontSize:"100px"}} onClick={() => setOpenDrawer(!openDrawer)}>
+      <Typography>Open DashBoard</Typography><MenuIcon />
     </MenuIcon>
     </>
 );
 }
-export default DrawerComponent;
+
+
+
+export default UserDashBoard;

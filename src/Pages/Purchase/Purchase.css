@@ -1,0 +1,16 @@
+.form-container form{
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+
+}
+
+.form-container form input{
+padding: 10px;
+border-radius: 5px;
+border: 0;
+background-color:lavender;
+
+width: 400px;   
+
+}

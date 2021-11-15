@@ -28,7 +28,7 @@ const Home = () => {
                <Container align="center" bgColor={bg}  >
                    
                    <Banner/>
-                   <AddProduct/>
+                 
                    <Topitems/>
                   <TopProducts/>
                    <hr></hr>

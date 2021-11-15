@@ -13,7 +13,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
+
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import cupset from '../../../images/cupset.jpg'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -21,13 +21,14 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { Rating } from '@mui/material';
 import Grow from '@mui/material/Grow';
 import ScrollAnimation from 'react-animate-on-scroll';
+import { Link } from 'react-router-dom';
 
 const theme = createTheme();
 
 const Topitems = () => {
   const[products,setProducts] = React.useState([]);
   React.useEffect(()=>{
-    fetch('http://localhost:5000/products/topitem')
+    fetch('https://whispering-retreat-62906.herokuapp.com/products/topitem')
     .then(res=>res.json())
     .then(data=>setProducts(data))
   },[])
@@ -94,7 +95,9 @@ const Topitems = () => {
                     <Button size="small">
                      <AddShoppingCartIcon />
                     </Button>
+                    <Link to={`/purchase/${product._id}`}>
                     <Button size="small">Buy Now</Button>
+                    </Link>
                   </CardActions>
                 </Card>
               </Grid>
@@ -103,7 +106,7 @@ const Topitems = () => {
         </Container>
       </main>
 
-      {/* Footer */}
+      {/* 
       <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
         <Typography variant="h6" align="center" gutterBottom>
           Footer

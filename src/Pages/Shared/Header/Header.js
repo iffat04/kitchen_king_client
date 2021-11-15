@@ -13,7 +13,7 @@ import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import DiningIcon from '@mui/icons-material/Dining';
 import { ThemeProvider, createMuiTheme } from '@mui/styles';
-import {Paper,Menu, MenuItem } from '@mui/material'; 
+import {Paper,Menu, MenuItem, Button } from '@mui/material'; 
 import { yellow, orange } from '@mui/material/colors';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList';
@@ -23,6 +23,8 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import DrawerComponent from '../DrawerComponent/DrawerComponent';
 import { useTheme } from '@mui/material/styles';
+import useAuth from '../../../hooks/useAuth'
+import PersonIcon from '@mui/icons-material/Person';
 const useStyles = makeStyles (theme => ({
     navlinks: {
       //marginLeft: theme.spacing(10),
@@ -53,7 +55,7 @@ const Header = () => {
     const classes = useStyles();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  
+    const {user, logOut} = useAuth();
 
     return (
     <React.Fragment>  
@@ -76,12 +78,25 @@ const Header = () => {
               <Link to="/allProducts" className={classes.link}>
                 Explore
               </Link>
-              <Link to="/myorders" className={classes.link}>
-                My Orders
+              <Link to="/addproduct" className={classes.link}>
+                add
               </Link>
+              {user.email &&
+              <Link to="/dashBoard" className={classes.link}>
+             DashBoard
+              </Link>
+               }
+              {user.email?
+              
+              <Button align="right" onClick={logOut}>
+                <PersonIcon/>{user.displayName} 
+                <Typography marginX="10px" bgcolor="yellow" padding="5px" borderRadius="4px">Log Out</Typography>
+                </Button>
+                  :
               <Link to="/login" className={classes.link}>
                 Login
               </Link>
+              }
             </div>
             </>)
         }

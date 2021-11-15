@@ -13,12 +13,15 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
+import GoogleIcon from '@mui/icons-material/Google';
+import useAuth from '../../hooks/useAuth'
+import { Navigate, Outlet, Redirect, Route, useLocation } from "react-router";
 
 const theme = createTheme();
 
 
 const Login = () => {
-
+  const {signInUsingGoogle, user} = useAuth();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -28,6 +31,8 @@ const Login = () => {
       password: data.get('password'),
     });
   };
+  const location = useLocation();
+  const redirectedPath = location.state?.from?.pathname || "/";
 
   return (
     <ThemeProvider theme={theme}>
@@ -68,10 +73,8 @@ const Login = () => {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+           
+
             <Button
               type="submit"
               fullWidth
@@ -92,10 +95,26 @@ const Login = () => {
                 </Link>
               </Grid>
             </Grid>
+            <Typography align="center">----Or----</Typography>
+            <FormControlLabel
+              control={
+              <GoogleIcon sx={{color:"orange", fontSize:"30px", marginX:"3px"}}/>
+              }
+              label=" SignIn with Google"
+              onClick={signInUsingGoogle}
+              sx={{border:"1px solid tomato", paddingX:"3px", paddingY:"2px",marginY:"10px", borderRadius:"4px"}}
+            />
+
           </Box>
         </Box>
+        {user.email &&
+
+        <Navigate replace to={redirectedPath}/>
+
+        }
       </Container>
     </ThemeProvider>
+    
   );
 }
 

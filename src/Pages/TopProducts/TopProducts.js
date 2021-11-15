@@ -13,6 +13,7 @@ import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import { Grid } from '@mui/material';
 
+
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const images = [

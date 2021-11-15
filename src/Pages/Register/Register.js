@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
-
+import GoogleIcon from '@mui/icons-material/Google';
 const theme = createTheme();
 
 
@@ -77,10 +77,6 @@ const Register = () => {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth
@@ -101,6 +97,14 @@ const Register = () => {
                 </Link>
               </Grid>
             </Grid>
+            <Typography align="center">----Or----</Typography>
+            <FormControlLabel
+              control={
+              <GoogleIcon sx={{color:"orange", fontSize:"30px", marginX:"3px"}}/>
+              }
+              label=" SignIn with Google"
+              sx={{border:"1px solid tomato", paddingX:"3px", paddingY:"2px",marginY:"10px", borderRadius:"4px"}}
+            />
           </Box>
         </Box>
       </Container>
