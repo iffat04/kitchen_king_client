@@ -1,7 +1,7 @@
 import { Checkbox } from '@mui/material';
 import React from 'react';
 import { Controller, useForm } from "react-hook-form";
-
+import './AddProduct.css'
 const AddProduct = () => {
   
   const { register,handleSubmit, control, reset } = useForm({
@@ -26,7 +26,8 @@ const AddProduct = () => {
 
 
   return (
-    <div>
+    <div className="addProduct-container">
+      <h2 style={{color:"orange"}}>Add a new product</h2>
     <form onSubmit={handleSubmit(onSubmit)}>
       <input placeholder="name" {...register("name")} />
       <br/>
@@ -59,7 +60,7 @@ const AddProduct = () => {
         render={({ field }) => <Checkbox {...field} />}
       />
       <br/>
-      <input type="submit" />
+      <input style={{color:'white', backgroundColor:'tomato', fontSize:'18px', }} type="submit" />
     </form>
      </div>
     );

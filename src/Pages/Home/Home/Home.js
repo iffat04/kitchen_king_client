@@ -17,20 +17,19 @@ import { makeStyles } from '@mui/styles';
 import Banner from '../Banner/Banner';
 import Topitems from '../Topitems/Topitems';
 import Reviews from '../Reviews/Reviews';
-import AddProduct from '../../AddProduct/AddProduct';
-import TopProducts from '../../TopProducts/TopProducts';
+
 
 const Home = () => {
     const bg= red[400]
     return (
         <>
            <div sx={{ my: "30px",}}  >
-               <Container align="center" bgColor={bg}  >
+               <Container align="center">
                    
                    <Banner/>
                  
                    <Topitems/>
-                  <TopProducts/>
+                  
                    <hr></hr>
 
                    <Typography variant ="h4" sx={{ my: 3 }}  align="center" color="GrayText" gutterBottom>Customer Reviews</Typography>

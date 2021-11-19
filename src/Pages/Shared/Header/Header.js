@@ -55,11 +55,13 @@ const Header = () => {
     const classes = useStyles();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-    const {user, logOut} = useAuth();
+    const {user, logOut, isloading, admin} = useAuth();
+   
+    const dashBoardPath = admin? '/adminDashBoard' : '/userDashBoard'
 
     return (
     <React.Fragment>  
-      <AppBar color="" sx={{ mb: "30px" }} marginBottom="30px" position="fixed"  >
+      <AppBar color="" sx={{ mb: "30px", marginBottom:"30px" }}  position="fixed"  >
         <CssBaseline />
         <Toolbar>
         <DiningIcon  fontSize="large" className={classes.logo}  />
@@ -78,15 +80,15 @@ const Header = () => {
               <Link to="/allProducts" className={classes.link}>
                 Explore
               </Link>
-              <Link to="/addproduct" className={classes.link}>
-                add
-              </Link>
               {user.email &&
-              <Link to="/dashBoard" className={classes.link}>
+              <Link to={dashBoardPath} className={classes.link}>
              DashBoard
               </Link>
                }
-              {user.email?
+
+              {isloading ||
+              
+              (user.email?
               
               <Button align="right" onClick={logOut}>
                 <PersonIcon/>{user.displayName} 
@@ -96,6 +98,7 @@ const Header = () => {
               <Link to="/login" className={classes.link}>
                 Login
               </Link>
+              )
               }
             </div>
             </>)

@@ -66,7 +66,7 @@ const Banner = () => {
           justifyContent:'center',
           height: 50,
           pl: 2,
-          bgcolor: 'background.default',
+          backgroundColor: 'background.default',
         }}
       >
       <Typography>{images[activeStep].label}</Typography>
@@ -78,7 +78,7 @@ const Banner = () => {
         enableMouseEvents
       >
         {images.map((step, index) => (
-          <div key={step.label}>
+          <div key={step.imgPath}>
             {Math.abs(activeStep - index) <= 2 ? (
               <Box
                 component="img"
@@ -90,7 +90,7 @@ const Banner = () => {
                   width: '100%',
                 }}
                 src={step.imgPath}
-                alt={step.label}
+                alt=""
               />
             ) : null}
           </div>

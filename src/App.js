@@ -8,19 +8,24 @@ import {
 import Header from './Pages/Shared/Header/Header';
 import Footer from './Pages/Shared/Footer/Footer';
 import Home from './Pages/Home/Home/Home';
-import Topitems from './Pages/Home/Topitems/Topitems';
-import Reviews from './Pages/Home/Reviews/Reviews';
 import AllProducts from './Pages/AllProducts/AllProducts';
 import Login from './Pages/Login/Login';
 import Purchase from './Pages/Purchase/Purchase';
-import Banner from './Pages/Home/Banner/Banner';
 import Register from './Pages/Register/Register';
 import AuthProvider from './contexts/authContext';
 import PrivateRoute from './Pages/PrivateRoute/PrivateRoute';
-import AddProduct from './Pages/AddProduct/AddProduct';
-import UserDashBoard from './Pages/UserDashBoard/UserDashBoard';
+import UserDashBoard from './Pages/UserDashBoard/UserDashBoard/UserDashBoard';
+import Pay from './Pages/UserDashBoard/Pay/Pay';
+import MyOrder from './Pages/UserDashBoard/MyOrder/MyOrder';
+import AdminDashBoard from './Pages/AdminDashBoard/AdminDashBoard/AdminDashBoard';
+import ManageOrders from './Pages/AdminDashBoard/ManageOrders/ManageOrders';
+import AddProduct from './Pages/AdminDashBoard/AddProduct/AddProduct';
+import MakeAdmin from './Pages/AdminDashBoard/MakeAdmin/MakeAdmin';
+import ManageProducts from './Pages/AdminDashBoard/ManageProducts/ManageProducts';
+import AdminRoute from './Pages/PrivateRoute/AdminRoute';
 
 function App() {
+
   return (
     <div className="App">
       <AuthProvider>
@@ -31,13 +36,30 @@ function App() {
         <Route path="/home" element={<Home/>}>
         </Route>
         <Route path = "/allProducts"  element = {<AllProducts />} />
+        <Route path = "/addProduct" element ={<AddProduct/>}/> 
         <Route path = "/login" element={<Login/>} />
         <Route path = "/register" element={<Register/>} />
          
         <Route element = {<PrivateRoute/>} >
             <Route  path = "/purchase/:id" element={<Purchase />} />
-            <Route path="/dashBoard" element={<UserDashBoard/>} />
+
+            <Route path="/userDashBoard/*" element={<UserDashBoard/>} >
+              <Route path="addProduct" element={<AddProduct/>} />
+              <Route path="pay" element={<Pay/>} />
+              <Route path="myOrder" element={<MyOrder/>}/>
+            </Route>
         </Route>
+
+          <Route element={<AdminRoute/>}>
+            <Route path="/adminDashBoard/*" element={<AdminDashBoard/>}>
+              <Route path="manageOrders" element={<ManageOrders/>}/>
+              <Route path="addProduct" element={<AddProduct/>}/>
+              <Route path="makeAdmin" element={<MakeAdmin/>} />
+              <Route path="manageProducts"  element={<ManageProducts/>} />
+            </Route>
+            <Route path="/adminDashBoard" element={<AdminDashBoard/>}/>
+          </Route>
+     
 
         </Routes>
         <Footer/>

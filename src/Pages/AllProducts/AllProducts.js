@@ -17,7 +17,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import { Rating } from '@mui/material';
+import { LinearProgress, Rating } from '@mui/material';
 
 import ScrollAnimation from 'react-animate-on-scroll';
 import { Link } from 'react-router-dom';
@@ -26,13 +26,20 @@ const theme = createTheme();
 
 const AllProducts= () => {
   const[products,setProducts] = React.useState([]);
+  const[loading,setLoading] = React.useState(true);
   React.useEffect(()=>{
-    fetch('http://localhost:5000/products')
+    fetch('https://whispering-retreat-62906.herokuapp.com/products')
     .then(res=>res.json())
     .then(data=>setProducts(data))
+    .finally(()=>{
+      setLoading(false)
+    })
   },[])
   console.log(products)
- 
+
+  if(loading)
+  return <LinearProgress  color="secondary" />
+  else
     return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -63,7 +70,7 @@ const AllProducts= () => {
         <Container sx={{ py: 4 }} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {products.map((product) => (
+            {products.map((product) => 
               <Grid item key={product._id} xs={12} sm={6} md={4}>
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
@@ -98,7 +105,7 @@ const AllProducts= () => {
                   </CardActions>
                 </Card>
               </Grid>
-            ))}
+            )}
           </Grid>
         </Container>
       </main>

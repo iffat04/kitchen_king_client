@@ -21,15 +21,19 @@ const theme = createTheme();
 
 
 const Login = () => {
-  const {signInUsingGoogle, user} = useAuth();
+  const {signInUsingGoogle,signInwithEmail, user} = useAuth();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    console.log({
+    
+    const newUser = {
       email: data.get('email'),
       password: data.get('password'),
-    });
+    };
+    console.log(newUser)
+   signInwithEmail(newUser.email ,newUser.password);
   };
   const location = useLocation();
   const redirectedPath = location.state?.from?.pathname || "/";

@@ -32,7 +32,7 @@ const Topitems = () => {
     .then(res=>res.json())
     .then(data=>setProducts(data))
   },[])
-  console.log(products)
+  //console.log(products)
   const gret=(
     <Typography>hellow</Typography>
   )
@@ -66,7 +66,7 @@ const Topitems = () => {
         <Container sx={{ py: 4 }} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {products.map((product) => (
+            {products.map((product) => 
               <Grid item key={product._id} xs={12} sm={6} md={4}>
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
@@ -80,7 +80,7 @@ const Topitems = () => {
                   />
                    <CardContent sx={{display:"flex", justifyContent: 'space-between' }}>
                     <Button size="small">
-                    <Rating name="read-only" value={product.rating} precision={0.5} readOnly />
+                    <Rating name="read-only" value={parseInt(product.rating)} precision={0.5} readOnly />
                     </Button>
                     <Button size="small" sx={{color:"tomato"}}>
                     <AttachMoneyIcon/><Typography>{product.price}</Typography>
@@ -101,7 +101,7 @@ const Topitems = () => {
                   </CardActions>
                 </Card>
               </Grid>
-            ))}
+            )}
           </Grid>
         </Container>
       </main>

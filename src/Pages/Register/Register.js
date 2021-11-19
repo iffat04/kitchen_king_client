@@ -13,19 +13,30 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import GoogleIcon from '@mui/icons-material/Google';
+import UseAuth from '../../hooks/useAuth';
+
+import { Navigate } from "react-router";
 const theme = createTheme();
 
 
 const Register = () => {
 
+  const {user,registerUser} =UseAuth();
+  const[regstatus, setRegstatus] = React.useState(false);
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
     // eslint-disable-next-line no-console
-    console.log({
+    const newUser = {
+      name:data.get('name'),
       email: data.get('email'),
       password: data.get('password'),
-    });
+    };
+    console.log(newUser)
+    registerUser(newUser.email ,newUser.password, newUser.name );
+    setRegstatus(true);
+
   };
 
   return (
@@ -107,6 +118,10 @@ const Register = () => {
             />
           </Box>
         </Box>
+        {regstatus &&
+        <Navigate replace to="/home" />
+          
+        }
       </Container>
     </ThemeProvider>
   );
