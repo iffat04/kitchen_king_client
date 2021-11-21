@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   Button,
+  Divider,
   Drawer,
   List,
   ListItem,
@@ -17,8 +18,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import LabelIcon from '@mui/icons-material/Label';
 import PersonIcon from '@mui/icons-material/Person';
 import { makeStyles } from '@mui/styles';
-import UseAuth from "../../../hooks/useAuth";
-
+import useAuth from '../../../hooks/useAuth'
 const useStyles = makeStyles(()=>({
   link:{
       textDecoration:"none",
@@ -33,7 +33,8 @@ const useStyles = makeStyles(()=>({
 function DrawerComponent() {
 const classes = useStyles();
 const [openDrawer, setOpenDrawer] = useState(false);
-const {user, logOut} = UseAuth();
+const {user, logOut, isloading, admin} = useAuth();
+const dashBoardPath = admin? '/adminDashBoard' : '/userDashBoard';
 return (
   <>
     <Drawer
@@ -41,39 +42,49 @@ return (
       onClose={() => setOpenDrawer(false)}
     >
       <List>
+      <Link style={{textDecoration:"none", color:"tomato"}} to='/'>
        <ListItem onClick={() => setOpenDrawer(false)}>
           <ListItemText>
-            <Link to="/">Home</Link>
+           Home
           </ListItemText>
         </ListItem>
+        </Link>
+        <Divider />
 
+        <Link style={{textDecoration:"none", color:"tomato"}} to='/allProducts'>     
         <ListItem onClick={() => setOpenDrawer(false)}>
           <ListItemText>
-            <Link to="/allProducts">Explore</Link>
+            Explore
           </ListItemText>
         </ListItem>
+        </Link>
+        <Divider />
 
        
         {user.email &&
+              <Link style={{textDecoration:"none", color:"tomato"}} to={dashBoardPath}>
                <ListItem onClick={() => setOpenDrawer(false)}>
                <ListItemText>
-                 <Link to="/DashBoard">DashBoard</Link>
+               DashBoard
                </ListItemText>
              </ListItem>
+             </Link>  
          }
+          <Divider />
+
           {user.email?
-              
-              <Button align="right" onClick={logOut}>
+              <ListItem >
+              <Button variant='outlined' color='warning' sx={{color:'tomato'}} onClick={logOut}>Log Out</Button>
                 <PersonIcon/>{user.displayName} 
-                <Typography marginX="10px" bgcolor="yellow" padding="5px" borderRadius="4px">Log Out</Typography>
-                </Button>
+              </ListItem>
                   :
-             
+                <Link style={{textDecoration:"none", color:"tomato"}} to='/login'>
                 <ListItem onClick={() => setOpenDrawer(false)}>
                 <ListItemText>
-                  <Link to="/login">Login</Link>
+                  Login
                 </ListItemText>
               </ListItem>
+              </Link>
               }
 
       </List>

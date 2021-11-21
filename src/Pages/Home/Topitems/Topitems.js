@@ -69,7 +69,12 @@ const Topitems = () => {
             {products.map((product) => 
               <Grid item key={product._id} xs={12} sm={6} md={4}>
                 <Card
-                  sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+                  sx={{ height: '100%', display: 'flex', flexDirection: 'column',
+                      '&:hover':{
+                        boxShadow: '4px -5px 23px 5px rgba(209,87,48,0.39)',
+                        
+                      }
+                      }}
                 >
                   <CardMedia
                     component="img"
@@ -95,8 +100,15 @@ const Topitems = () => {
                     <Button size="small">
                      <AddShoppingCartIcon />
                     </Button>
-                    <Link to={`/purchase/${product._id}`}>
-                    <Button size="small">Buy Now</Button>
+                    <Link  style={{textDecoration:"none"}}  to={`/purchase/${product._id}`}>
+                    <Button sx={{ '&:hover': {
+                        backgroundColor: 'orange',
+                        color:'white',
+                        transform: 'scale(1.1)'
+                       
+                      } }} size="small">
+                    Buy Now
+                    </Button>
                     </Link>
                   </CardActions>
                 </Card>

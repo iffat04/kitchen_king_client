@@ -49,7 +49,7 @@ const ManageOrders = () => {
     ////////////////////////////////////admin work approve order
     
     const handleApprove = (id, order)=>{
-        const updateUrl= `    https://whispering-retreat-62906.herokuapp.com/order/approve/${id}`
+        const updateUrl= `https://whispering-retreat-62906.herokuapp.com/order/approve/${id}`
         order.status = true;
         console.log(order)
         fetch(updateUrl,{

@@ -25,12 +25,13 @@ import image from '../../../images/Control Panel.gif'
 import { CardMedia } from '@mui/material';
 import video from '../../../images/Control Panel.mp4'
 import image2 from '../../../images/manufacturing-process-animate.svg'
+import UseAuth from '../../../hooks/useAuth';
 const drawerWidth = 240;
 
 function UserDashBoard(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+  const {isloading,logOut } = UseAuth();
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -38,10 +39,14 @@ function UserDashBoard(props) {
   const drawer = (
     <div>
         <Toolbar>
+        <Link to="/" style={{textDecoration:'none'}}>
         <DiningIcon  fontSize="large"  sx={{color:"orange"}}  />
+        </Link>
+        <Link to="/" style={{textDecoration:'none'}}>
             <Typography variant="h5" sx={{ justifyContent: 'center', marginRight:"20px" , color:"orange"}} >
             KithcenMaster 
             </Typography>
+        </Link>
         </Toolbar>
       <Divider />
   
@@ -88,15 +93,14 @@ function UserDashBoard(props) {
           </ListItem>
           </Link>
           <Divider />
-          <Link to="Log Out" style={{textDecoration:"none", color:"grey"}} >
-          <ListItem button className="item">
+          <Link to="/" style={{textDecoration:"none",color:"grey" }} >
+          <ListItem onClick={logOut} button className="item">
             <ListItemIcon>
            <LogoutIcon sx={{color:"orange"}}  />
             </ListItemIcon>
             <ListItemText primary="Log Out" />
           </ListItem>
           </Link>
-
       </List>
 
       <Divider />
@@ -185,12 +189,5 @@ function UserDashBoard(props) {
   );
 }
 
-UserDashBoard.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window: PropTypes.func,
-};
 
 export default UserDashBoard;

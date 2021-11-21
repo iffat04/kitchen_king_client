@@ -1,9 +1,11 @@
 import { Alert, Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
+import useAuth from '../../../hooks/useAuth'
 
 const MakeAdmin = () => {
     const [email,setEmail] = useState('');
     const [success, setSuccess] = useState(false);
+    const {token} = useAuth();
     const handleOnBlur= e=>{
         setEmail(e.target.value);
         e.target.value= email;
@@ -11,9 +13,10 @@ const MakeAdmin = () => {
     const handleMakeAdmin= e=>{
         e.preventDefault();
         const user={email}
-        fetch('    https://whispering-retreat-62906.herokuapp.com/makeAdmin', {
+        fetch('http://localhost:5000/makeAdmin', {
             method:"PUT",
             headers:{
+                'authorization':`Bearer ${token}`,
                 'content-type':'application/json'
             },
             body:JSON.stringify(user)

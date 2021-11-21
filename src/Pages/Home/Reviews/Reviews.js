@@ -9,254 +9,19 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { FormControl, Grid, InputLabel, MenuItem, Rating, Select, TextField } from '@mui/material';
 import { padding } from '@mui/system';
-
-const steps = [
-  {
-    label: 'Select campaign settings',
-    description: `For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.`,
-  },
-  {
-    label: 'Create an ad group',
-    description:
-      'An ad group contains one or more ads which target a shared set of keywords.',
-  },
-  {
-    label: 'Create an ad',
-    description: `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`,
-  },
-];
+import image from '../../../images/yellowcup3.jpg'
 
 const Reviews = () => {
-  const theme = useTheme();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = steps.length;
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-  //handle rating
-  const [value, setValue] = React.useState(2);
-  const reviewRef= React.useRef();
-
-  /*console.log(ratingRef.current.value)*/
-  //handle form product
-  const [product, setProduct] = React.useState('');
-  const [review,setReview] = React.useState('');
- 
-
-const handleData =()=>{
-    console.log(value,product, review)
-}
-
-
-  return (
-      <>
-     
-    <Grid container spacing={2} columns={{ sm:6 , md: 12 }} sx={{ justifyContent: 'center', marginTop:4 }} >
-     
-        <Grid item xs={6} sm={12} md={6} sx={{ display:"flex",justifyContent: 'center',}}   >
-       
-            <div>
-            <Typography variant="h5"  sx={{color:"orange" }}  >Give Reviews </Typography>
-                <Grid container spacing={2} marginY="20px" sx={{backgroundColor: "SeaShell",padding:"15px"}} > 
-                    <Grid item xs>
-                        <TextField
-                        id="outlined-multiline-static"
-                        label="Review"
-                        onChange={(event)=>{
-                            setReview(event.target.value)
-                        }}
-                        multiline
-                        rows={4}/>
-                    </Grid>
-                    <Grid item xs={6}>
-                    <FormControl align="left" variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                            <InputLabel id="demo-simple-select-standard-label">Product</InputLabel>
-                            <Select
-                            labelId="demo-simple-select-standard-label"
-                            id="demo-simple-select-standard"
-                            value={product}
-                            onChange={(event)=>{
-                                setProduct(event.target.value)
-                            }}
-                            label="Age"
-                            >
-                            <MenuItem value={"spoon"}>Spoon</MenuItem>
-                            <MenuItem value="bouwl">Bowl</MenuItem>
-                            <MenuItem value="knife">Knife</MenuItem>
-                            </Select>
-                    </FormControl>
-                    <Typography variant="p" align="left" component="legend"> Rating</Typography>
-                    <Rating
-                        name="simple-controlled"
-                        value={value}
-                        precision={0.5}
-                        onChange={(event, newValue) => {
-                        setValue(newValue);
-                        }}
-                     
-                    />
-
-                    </Grid>
-                   
-                </Grid>
-                <Button onClick={handleData} variant="outlined" color="warning">Submit</Button>
-                  
-                    
-                    
-
-                   
-
-            </div>
-        </Grid>
-
-        <Grid item xs={6} sm={12} md={6}    sx={{ display:"flex",justifyContent:"center"}} >
-            <div >
-               <Typography  variant="h5" marginY="10px"   sx={{color:"orange"  }}  >Reviews </Typography>
-                <Box sx={{ maxWidth: 500, flexGrow: 1,  }}>
-                <Paper
-                square
-                elevation={0}
-                sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent:'center',
-                height: 50,
-                pl: 2,
-                backgroundColor:"SeaShell"
-               
-                }}
-               >
-                  
-            <Typography sx={{backgroundColor:"SeaShell"}} align="center">{steps[activeStep].label}</Typography>
-            </Paper>
-            <Box sx={{ height: 255, maxWidth: 500, width: '100%', p: 2, backgroundColor:"SeaShell" }}>
-                {steps[activeStep].description}
-            </Box>
-
-
-            <MobileStepper
-                variant="text"
-                steps={maxSteps}
-                position="static"
-                activeStep={activeStep}
-                nextButton={
-                <Button
-                    sx={{color:"tomato"}}
-                    size="small"
-                    onClick={handleNext}
-                    disabled={activeStep === maxSteps - 1}
-                >
-                    Next
-                    {theme.direction === 'rtl' ? (
-                    <KeyboardArrowLeft />
-                    ) : (
-                    <KeyboardArrowRight />
-                    )}
-                </Button>
-                }
-                backButton={
-                <Button   sx={{color:"tomato"}} size="small" onClick={handleBack} disabled={activeStep === 0}>
-                    {theme.direction === 'rtl' ? (
-                    <KeyboardArrowRight />
-                    ) : (
-                    <KeyboardArrowLeft />
-                    )}
-                    Back
-                </Button>
-                }
-            />
-            </Box>
-            </div>
-        </Grid>
-    </Grid>
-    </>
-  );
-}
-
-
-export default Reviews;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
-import MobileStepper from '@mui/material/MobileStepper';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import { FormControl, Grid, InputLabel, MenuItem, Rating, Select, TextField } from '@mui/material';
-import { padding } from '@mui/system';
-import axios from 'axios';
-
-
-
-/*
-const steps = [
-  {
-    label: 'Select campaign settings',
-    description: `For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.`,
-  },
-  {
-    label: 'Create an ad group',
-    description:
-      'An ad group contains one or more ads which target a shared set of keywords.',
-  },
-  {
-    label: 'Create an ad',
-    description: `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`,
-  },
-];
-
-
-const Reviews = () => {
-  const theme = useTheme();
-  
-const[readreview,setreadreview]= React.useState([]);
-const [status, setStatus]= React.useState(false);
-React.useEffect(()=>{
-    fetch('    https://whispering-retreat-62906.herokuapp.com/review')
+  const [reviews, setReviews]= React.useState([]);
+  React.useEffect(()=>{
+    fetch('https://whispering-retreat-62906.herokuapp.com/reviews')
     .then(res=>res.json())
-    .then(data=>{
-        setreadreview(data);
-    })
-},[status]) 
-console.log(readreview)
+    .then(data=>setReviews(data))
+  },[])
+  console.log(reviews)
+  const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = readreview?.length;
+  const maxSteps = reviews.length;
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -265,102 +30,17 @@ console.log(readreview)
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-  //handle rating
-  const [value, setValue] = React.useState(2);
-  const reviewRef= React.useRef();
-
-  
-  //handle form product
-  const [product, setProduct] = React.useState('');
-  const [review,setReview] = React.useState('');
- 
-
-const handleData =()=>{
-    console.log(value,product, review)
-    const data ={
-      rating:value,
-      product:product,
-      review:review
-    }
-    axios.post('    https://whispering-retreat-62906.herokuapp.com/review',data)
-    .then(res=>{
-      setStatus(true);
-    alert('post success')
-    })
-}
-
-
 
 
   return (
       <>
      
-    <Grid container spacing={2} columns={{ sm:6 , md: 12 }} sx={{ justifyContent: 'center', marginTop:4 }} >
-     
-        <Grid item xs={6} sm={12} md={6} sx={{ display:"flex",justifyContent: 'center',}}   >
-       
-            <div>
-            <Typography variant="h5"  sx={{color:"orange" }}  >Give Reviews </Typography>
-                <Grid container spacing={2} marginY="20px" sx={{backgroundColor: "SeaShell",padding:"15px"}} > 
-                    <Grid item xs>
-                        <TextField
-                        id="outlined-multiline-static"
-                        label="Review"
-                        onChange={(event)=>{
-                            setReview(event.target.value)
-                        }}
-                        multiline
-                        rows={4}/>
-                    </Grid>
-                    <Grid item xs={6}>
-                    <FormControl align="left" variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                            <InputLabel id="demo-simple-select-standard-label">Product</InputLabel>
-                            <Select
-                            labelId="demo-simple-select-standard-label"
-                            id="demo-simple-select-standard"
-                            value={product}
-                            onChange={(event)=>{
-                                setProduct(event.target.value)
-                            }}
-                            label="Age"
-                            >
-                            <MenuItem value={"spoon"}>Spoon</MenuItem>
-                            <MenuItem value="bouwl">Bowl</MenuItem>
-                            <MenuItem value="knife">Knife</MenuItem>
-                            </Select>
-                    </FormControl>
-                    <Typography variant="p" align="left" component="legend"> Rating</Typography>
-                    <Rating
-                        name="simple-controlled"
-                        value={value}
-                        precision={0.5}
-                        onChange={(event, newValue) => {
-                        setValue(newValue);
-                        }}
-                     
-                    />
+    <Grid container spacing={2} sx={{ justifyContent: 'center', marginTop:4 }} >
 
-                    </Grid>
-                   
-                </Grid>
-                <Button onClick={handleData} variant="outlined" color="warning">Submit</Button>
-                  
-                    
-                    
 
-                   
-
-            </div>
-        </Grid>
-
-        <Grid item xs={6} sm={12} md={6}    sx={{ display:"flex",justifyContent:"center"}} >
-            <div >
+        <Grid item xs={12} sm={12} md={12}    sx={{ display:"flex",justifyContent:"center"}} >
+            <div style={{backgroundColor:"seashell"}} >
                <Typography  variant="h5" marginY="10px"   sx={{color:"orange"  }}  >Reviews </Typography>
-
-
-
-                {readreview.map(review=>{
-                
                 <Box sx={{ maxWidth: 500, flexGrow: 1,  }}>
                 <Paper
                 square
@@ -376,15 +56,22 @@ const handleData =()=>{
                 }}
                >
                   
-            <Typography sx={{backgroundColor:"SeaShell"}} align="center">{review.product}</Typography>
+            <Typography sx={{backgroundColor:"white", paddingX:'100px', borderRadius:"10px", boxShadow:' 5px 10px 8px #888888' }} align="center">{reviews[activeStep]?.product}</Typography>
             </Paper>
-            <Box sx={{ height: 255, maxWidth: 500, width: '100%', p: 2, backgroundColor:"SeaShell" }}>
-                {review.review}
-            </Box>
-
+            <Rating name="read-only" value={parseFloat(reviews[activeStep]?.rating)} precision={0.5}   readOnly />
+            <div container style={{display:'flex', justifyContent:'space-between',alignItems: 'center',  flexWrap:'wrap'}} >
+            <div style={{ height: 100, maxWidth: 500, width: '100%', p: 2, backgroundColor:"SeaShell" }}>
+                {reviews[activeStep]?.review}
+            </div>
+            <div style={{ height: 200, maxWidth: 500, width: '100%', backgroundColor:"SeaShell", marginY:'10px',paddingY:"20px" }}>
+                <Typography align="center">Picture</Typography>
+                <img height="100%" style={{borderRadius:"10px",marginBottom:"10px"}} src={image} alt="" />
+            </div>
+            </div>
 
             <MobileStepper
                 variant="text"
+                sx={{marginTop:"30px"}}
                 steps={maxSteps}
                 position="static"
                 activeStep={activeStep}
@@ -415,7 +102,6 @@ const handleData =()=>{
                 }
             />
             </Box>
-})}
             </div>
         </Grid>
     </Grid>
@@ -425,4 +111,18 @@ const handleData =()=>{
 
 
 export default Reviews;
-*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

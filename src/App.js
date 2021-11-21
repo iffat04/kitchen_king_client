@@ -23,6 +23,7 @@ import AddProduct from './Pages/AdminDashBoard/AddProduct/AddProduct';
 import MakeAdmin from './Pages/AdminDashBoard/MakeAdmin/MakeAdmin';
 import ManageProducts from './Pages/AdminDashBoard/ManageProducts/ManageProducts';
 import AdminRoute from './Pages/PrivateRoute/AdminRoute';
+import Review from './Pages/UserDashBoard/Review/Review';
 
 function App() {
 
@@ -44,7 +45,7 @@ function App() {
             <Route  path = "/purchase/:id" element={<Purchase />} />
 
             <Route path="/userDashBoard/*" element={<UserDashBoard/>} >
-              <Route path="addProduct" element={<AddProduct/>} />
+              <Route path="review" element={<Review/>} />
               <Route path="pay" element={<Pay/>} />
               <Route path="myOrder" element={<MyOrder/>}/>
             </Route>

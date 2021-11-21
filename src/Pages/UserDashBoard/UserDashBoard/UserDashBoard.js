@@ -30,7 +30,7 @@ const drawerWidth = 240;
 function UserDashBoard(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-   const {isloading} = UseAuth();
+   const {isloading,logOut } = UseAuth();
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -38,10 +38,14 @@ function UserDashBoard(props) {
   const drawer = (
     <div>
         <Toolbar>
+        <Link to="/" style={{textDecoration:'none'}}>
         <DiningIcon  fontSize="large"  sx={{color:"orange"}}  />
+        </Link>
+        <Link to="/" style={{textDecoration:'none'}}>
             <Typography variant="h5" sx={{ justifyContent: 'center', marginRight:"20px" , color:"orange"}} >
             KithcenMaster 
             </Typography>
+        </Link>
         </Toolbar>
       <Divider />
   
@@ -79,14 +83,15 @@ function UserDashBoard(props) {
 
           <Divider />
 
-          <Link to="addProduct" style={{textDecoration:"none", color:"grey"}} >
-          <ListItem button className="item">
+          <Link to="/" style={{textDecoration:"none",color:"grey" }} >
+          <ListItem onClick={logOut} button className="item">
             <ListItemIcon>
            <LogoutIcon sx={{color:"orange"}}  />
             </ListItemIcon>
             <ListItemText primary="Log Out" />
           </ListItem>
           </Link>
+    
 
       </List>
 
@@ -97,7 +102,7 @@ function UserDashBoard(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
   if(isloading) return <LinearProgress color="secondary" />
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', minHeight:"100vh" }}>
       <CssBaseline />
       <AppBar
         color="inherit"

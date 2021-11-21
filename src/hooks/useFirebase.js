@@ -1,5 +1,5 @@
 import  { useEffect, useState } from 'react';
-import { getAuth,updateProfile, createUserWithEmailAndPassword,signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider ,onAuthStateChanged ,signOut } from "firebase/auth";
+import { getAuth,updateProfile,getIdToken, createUserWithEmailAndPassword,signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider ,onAuthStateChanged ,signOut } from "firebase/auth";
 import initializeAuthentication from '../Pages/Firebase/firebase.initialize';
 
 
@@ -12,6 +12,7 @@ const useFirebase = () => {
     const[error,setError]=useState('');
     const [admin, setAdmin] = useState(false);
     const[verifying, setVerifying] = useState(false);
+    const [token, setToken]= useState('');
     const auth = getAuth();
     const googleProvider = new GoogleAuthProvider();
     //create user with email pass
@@ -118,11 +119,18 @@ const useFirebase = () => {
     }
 
     //observe user auth state
+
     useEffect(()=>{
         setIsloading(true)
-        onAuthStateChanged(auth, (user)=>{
+        const unsubscribed = onAuthStateChanged(auth, (user)=>{
             if(user){
                 setUser(user)
+                //get id token jWT
+                getIdToken(user)
+                .then(idToken =>{
+                    console.log(idToken)
+                    setToken(idToken);
+                })
             }
             else{
                 //user signed out
@@ -130,6 +138,7 @@ const useFirebase = () => {
             setIsloading(false);
         }
         );
+        return ()=> unsubscribed ;
     },[]);
 
     //save to mongodb
@@ -171,6 +180,7 @@ const useFirebase = () => {
         verifying,
         error,
         admin,
+        token,
         registerUser,
         signInwithEmail,
         signInUsingGoogle,
